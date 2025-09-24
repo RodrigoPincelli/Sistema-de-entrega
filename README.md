@@ -1,7 +1,7 @@
 [README.md](https://github.com/user-attachments/files/22504588/README.md)
 # Sistema de Entregas (Java CLI)
 
-Aplicação de console em Java 17 desenvolvida para fins acadêmicos (Engenharia da Computação). Permite gerenciar usuários e eventos com persistência local em arquivos, menu em português e modo demonstração.
+Aplicação de console em Java 25 desenvolvida para fins acadêmicos (Engenharia da Computação). Permite gerenciar usuários e eventos com persistência local em arquivos, menu em português e modo demonstração.
 
 ## Funcionalidades
 - **CRUD de Usuários**: cadastrar, listar e remover.
