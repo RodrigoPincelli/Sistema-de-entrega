@@ -13,7 +13,7 @@ Aplicação de console em Java 25 desenvolvida para fins acadêmicos (Engenharia
 - **Modo Demonstração**: `--demo` para executar sem entrada de teclado.
 
 ## Requisitos
-- **Java JDK 17+** (Temurin/Adoptium recomendado).
+- **Java JDK 25+** (Temurin/Adoptium recomendado).
 - Windows, macOS ou Linux (testado no Windows/PowerShell).
 
 ## Estrutura do Projeto
