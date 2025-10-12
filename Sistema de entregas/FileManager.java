@@ -5,6 +5,8 @@ import java.util.List;
 public class FileManager {
     private static final String ARQ_EVENTOS = "eventos.dat";
     private static final String ARQ_USUARIOS = "usuarios.dat";
+    private static final String ARQ_PROJETOS = "projetos.dat";
+    private static final String ARQ_EQUIPES = "equipes.dat";
 
     public static void salvarEventos(List<Evento> eventos) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARQ_EVENTOS))) {
@@ -42,6 +44,48 @@ public class FileManager {
             return (List<Usuario>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Erro ao carregar usuários: " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    // Projetos
+    public static void salvarProjetos(List<Projeto> projetos) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARQ_PROJETOS))) {
+            oos.writeObject(projetos);
+        } catch (IOException e) {
+            System.err.println("Erro ao salvar projetos: " + e.getMessage());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static List<Projeto> carregarProjetos() {
+        File f = new File(ARQ_PROJETOS);
+        if (!f.exists()) return new ArrayList<>();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f))) {
+            return (List<Projeto>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Erro ao carregar projetos: " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    // Equipes
+    public static void salvarEquipes(List<Equipe> equipes) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARQ_EQUIPES))) {
+            oos.writeObject(equipes);
+        } catch (IOException e) {
+            System.err.println("Erro ao salvar equipes: " + e.getMessage());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static List<Equipe> carregarEquipes() {
+        File f = new File(ARQ_EQUIPES);
+        if (!f.exists()) return new ArrayList<>();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f))) {
+            return (List<Equipe>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Erro ao carregar equipes: " + e.getMessage());
             return new ArrayList<>();
         }
     }

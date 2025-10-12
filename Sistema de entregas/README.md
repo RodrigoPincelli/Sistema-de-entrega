@@ -3,13 +3,12 @@
 Aplicação de console em Java 17 desenvolvida para fins acadêmicos (Engenharia da Computação). Permite gerenciar usuários e eventos com persistência local em arquivos, menu em português e modo demonstração.
 
 ## Funcionalidades
-- **CRUD de Usuários**: cadastrar, listar e remover.
-- **CRUD de Eventos**: cadastrar, listar e remover.
-- **Categorias por Enum**: `Categoria` (`FESTA`, `SHOW`, `ESPORTE`, `CURSO`, `OUTROS`).
-- **Datas Modernas**: `LocalDateTime` (Java Time API).
-- **Persistência Local**: serialização binária (`usuarios.dat`, `eventos.dat`).
-- **Menu em PT-BR**: interface de linha de comando amigável.
-- **Modo Demonstração**: `--demo` para executar sem entrada de teclado.
+- **CRUD de Usuários**: cadastrar, listar e remover. Campos: nome completo, CPF, e-mail, cargo, login, senha e perfil (`Perfil`: ADMINISTRADOR, GERENTE, COLABORADOR).
+- **CRUD de Eventos**: cadastrar, listar e remover (`Categoria`: FESTA, SHOW, ESPORTE, CURSO, OUTROS) com datas `LocalDateTime`.
+- **CRUD de Projetos**: cadastrar, listar, remover; status por enum `StatusProjeto` (PLANEJADO, EM_ANDAMENTO, CONCLUIDO, CANCELADO), gerente responsável (usuário com perfil GERENTE), datas `LocalDate`.
+- **CRUD de Equipes**: cadastrar, listar, remover; gerenciar membros (usuários) e vincular equipes a projetos.
+- **Persistência Local**: serialização binária (`usuarios.dat`, `eventos.dat`, `projetos.dat`, `equipes.dat`).
+- **Menu em PT-BR** e **Modo Demonstração** (`--demo`).
 
 ## Requisitos
 - **Java JDK 17+** (Temurin/Adoptium recomendado).
@@ -19,10 +18,14 @@ Aplicação de console em Java 17 desenvolvida para fins acadêmicos (Engenharia
 ```
 Sistema de entregas/
 ├─ Categoria.java       # Enum de categorias
+├─ Perfil.java          # Enum de perfil de usuário
 ├─ Usuario.java         # Modelo de usuário (Serializable)
 ├─ Evento.java          # Modelo de evento (Serializable)
 ├─ FileManager.java     # Persistência em arquivos .dat (serialização)
-├─ Main.java            # Menu CLI, utilitários de input e modo --demo
+├─ StatusProjeto.java   # Enum de status de projetos
+├─ Projeto.java         # Modelo de projeto (Serializable)
+├─ Equipe.java          # Modelo de equipe (Serializable)
+├─ Main.java            # Menu CLI (submenus Usuários/Projetos/Equipes/Eventos) e modo --demo
 ├─ sistema-entregas.jar # JAR executável (gerado por jar)
 ├─ .gitignore           # Arquivo para ignorar artefatos locais
 ├─ LICENSE              # Licença MIT
@@ -69,6 +72,14 @@ Modo demonstração via JAR:
 java -jar sistema-entregas.jar --demo
 ```
 
+### Script de Build (Windows)
+Para compilar e empacotar o JAR com um único comando, use o script `build.ps1`:
+
+```powershell
+./build.ps1
+```
+Ele limpa `.class`/`.jar` antigos, compila e gera `sistema-entregas.jar` pronto para execução.
+
 ### macOS/Linux (bash/zsh)
 ```bash
 # 1) Abrir a pasta do projeto
@@ -85,18 +96,19 @@ java Main --demo
 ```
 
 ## Uso Rápido (Interativo)
-- Opção `1`: Cadastrar usuário (ID, Nome, Email, Telefone, Endereço)
-- Opção `4`: Cadastrar evento (ID, Nome, Data/Hora, Local, Categoria, Capacidade, Preço)
-- Opção `5`: Listar eventos
-- Opção `7`: Salvar dados
-- Opção `0`: Sair (salva automaticamente)
+- **1/2/3**: Usuários (cadastrar/listar/remover). Campos: Nome completo, CPF, Email, Cargo, Login, Senha, Perfil.
+- **4/5/6**: Eventos (cadastrar/listar/remover). Campos: Nome, Data/Hora, Local, Categoria, Capacidade, Preço.
+- **7**: Submenu Projetos — cadastrar/listar/remover e vincular equipe.
+- **8**: Submenu Equipes — cadastrar/listar/remover, adicionar/remover membros.
+- **9**: Salvar dados.  
+- **0**: Sair (salva automaticamente).
 
 ## Modo Demonstração
 Executa o sistema sem exigir entrada no teclado, populando alguns dados de exemplo e listando-os:
 ```bash
 java Main --demo
 ```
-Gera/atualiza os arquivos `usuarios.dat` e `eventos.dat` na pasta do projeto.
+Gera/atualiza os arquivos `usuarios.dat`, `eventos.dat`, `projetos.dat` e `equipes.dat` na pasta do projeto.
 
 ## Solução de Problemas
 - **"java/javac não reconhecido"**: instale o JDK 17 e garanta `JAVA_HOME` e `%JAVA_HOME%\bin` no `PATH` (Windows) ou `PATH` no macOS/Linux.
@@ -112,7 +124,7 @@ Gera/atualiza os arquivos `usuarios.dat` e `eventos.dat` na pasta do projeto.
 - **Empacotamento**: script de build e `.jar` executável.
 
 ## Licença
-Defina a licença conforme sua preferência (ex.: MIT). Exemplo: crie um arquivo `LICENSE` com o texto da licença.
+Este projeto está licenciado sob a **MIT License**. Veja o arquivo `LICENSE` para detalhes.
 
 ## Autor
 Rodrigo Pincelli — Projeto acadêmico de Engenharia da Computação.
